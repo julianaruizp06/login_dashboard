@@ -1,16 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from "react-router-dom"
 import { Registrar } from "./Registrar"
 import { Listar } from "./Listar"
 import { Estadistica } from "./Estadistica"
+import axios from "axios"
 
 export const Menu = (props) => {
 
   const [reg, setReg] = useState("");
   const [lis, setLis] = useState("");
-  const [est, setEst] = useState("");
- 
-  
+  const [est, setEst] = useState("")
+  const [usuariosData, setUsuariosData] = useState([])
+  const [usuario, setUsuario] = useState("")
+
+
+  const obtenerUsuarios = async () => {
+    await axios.get("http://localhost:3001/users")
+        .then( res => {
+          res.data.body.map( usuario => {
+            setUsuario(usuario.name)
+          })
+            setUsuariosData(res.data.body)
+        })
+  }
+
 
   function cerrarSesion(){
     document.getElementById("caja_menu").style.display = "none";
@@ -41,7 +54,9 @@ export const Menu = (props) => {
     setEst("1");
   }
 
-
+  useEffect(() => {
+  // obtenerUsuarios();
+  }, []);
 
   return (
     
@@ -51,7 +66,7 @@ export const Menu = (props) => {
     <div id="caja_menu" style={{textAlign:"left"}}>
 
     <strong className="h3">
-      Bienvenido Usuario : { props.usu.toUpperCase() }
+      Bienvenido Usuario : {usuario}
     </strong>
               
     <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{marginTop:20}}>
