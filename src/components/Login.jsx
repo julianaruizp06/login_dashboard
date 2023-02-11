@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Menu } from './Menu'
+import React, { useState } from 'react';
+import { DashboardUsuarios } from './DashboardUsuarios';
+
+
 
 export const Login = () => {
 
@@ -33,22 +35,27 @@ export const Login = () => {
   return (
     
 
-    <div className="container" style={{background:"lightgray", marginTop:20, padding:20}}>
+    <div className="container" style={{ marginTop:150, padding:20,fontFamily:"serif"}}>
         
     <form id="form_login">
+
+  
+
+         
+
         <div>
-            <h1 style={{color:"blue", textalign:"center"}}>LOGIN</h1>
-            <label htmlFor="txtusu"><strong>Username</strong></label>
+            <h1 style={{color:"white", textalign:"center",fontSize:54 }}>LOGIN</h1>
+            <label style={{color:"white",fontSize:20}} htmlFor="txtusu"><strong>Username</strong></label>
             <input type="text" id="txtusu" style={{textAlign:"center"}} className="form-control"  onChange={ (e)=>setUsu(e.target.value) }  required/>
         </div>
         <div>
-            <label htmlFor="txtpas"><strong>Password</strong></label>
+            <label style={{color:"white", fontSize:20}}htmlFor="txtpas"><strong>Password</strong></label>
             <input type="password" id="txtpas" style={{textAlign:"center"}} className="form-control"  onChange={ (e)=>setPas(e.target.value) }  required/>
         </div><br/>
-        <input type="submit"  className="btn btn-primary" value="Login" onClick={ iniciarSesion }/>
+        <input style={{color:"#7439db"}} type="submit"  className="button" value="Login" onClick={ iniciarSesion }/>
     </form>
 
-    { miLogin === "true" && <Menu usu={usu}/> }
+ { miLogin === "true" && <DashboardUsuarios  usu={usu}/> }
 
 </div>
 
